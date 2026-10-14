@@ -1,0 +1,45 @@
+\section{Цепи Маркова}
+
+\begin{definition}[Цепь Маркова]
+Рассмотрим последовательность случайных величин $S^{(0)}, S^{(1)}, \dots, S^{(n)}$, принимающих значения из конечного множества состояний $\{s_1, s_2, \dots, s_N\}$.
+
+Начальное распределение: $\vec{p}^{(0)} = (p_0^{(0)}, \dots, p_N^{(0)})$.
+
+Матрица переходных вероятностей $P_{N \times N} = \|p_{ij}\|$ удовлетворяет условиям:
+\begin{enumerate}
+    \item $p_{ij} \ge 0$
+    \item $\sum_{j=1}^{N} p_{ij} = 1$ для всех $i$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Марковское свойство]
+Вероятность траектории:
+$$ P(S^{(0)} = s_{i_0}, S^{(1)} = s_{i_1}, \dots, S^{(n)} = s_{i_n}) = p_{i_0}^{(0)} \cdot p_{i_0 i_1} \cdot p_{i_1 i_2} \cdots p_{i_{n-1} i_n} $$
+для строки $s_{i_0}, s_{i_1}, \dots, s_{i_n}$ длины $n+1$.
+\end{definition}
+
+\begin{theorem}[Марковское свойство (условная независимость)]
+Для цепи Маркова условные вероятности событий при условии промежуточного состояния распадаются на произведение:
+$$ P(AC|B) = P(A|B) \cdot P(C|B) $$
+где $A = \{S^{(t)} = s_i\}$, $B = \{S^{(r)} = s_j\}$, $C = \{S^{(v)} = s_k\}$ при $t < r < v$.
+\end{theorem}
+
+\begin{proof}
+Рассмотрим событие $B = \{S^{(r)} = s_j\}$.
+$$ P(B) = \sum_{i_0, i_1, \dots, i_{r-1}, i_{r+1}, \dots, i_n} P(S^{(0)} = s_{i_0}, \dots, S^{(r)} = s_j, \dots, S^{(n)} = s_{i_n}) $$
+$$ = \sum p_{i_0}^{(0)} p_{i_0 i_1} \cdots p_{i_{r-1} j} \cdot p_{j i_{r+1}} \cdots p_{i_{n-1} i_n} $$
+
+Для события $C = \{S^{(t)} = s_i, S^{(v)} = s_j\}$:
+$$ P(C) = \sum p_{i_0}^{(0)} p_{i_0 i_1} \cdots p_{i_{t-1} i} \cdot p_{i i_{t+1}} \cdots p_{i_{v-1} j} \cdot p_{j i_{v+1}} \cdots p_{i_{n-1} i_n} $$
+
+Разделим сумму на две части (до момента $r$ и после):
+$$ P(C) = \underbrace{\sum p_{i_0}^{(0)} p_{i_0 i_1} \cdots p_{i_{r-1} i}}_{P(B)} \cdot \underbrace{\sum p_{i i_{r+1}} \cdots p_{i_{n-1} j}}_{P(C|B)} $$
+
+Тогда:
+$$ P(AC|B) = \frac{P(ABC)}{P(B)} = \frac{P(C|AB)P(AB)}{P(B)} = P(A|B) \cdot P(C|AB) = P(A|B) \cdot P(C|B) $$
+\end{proof}
+
+\begin{statement}
+Сумма вероятностей всех траекторий равна 1:
+$$ \sum_{i_0, \dots, i_n} P(S^{(k)} = s_{i_k} \text{ для } k \in [1, n]) = \sum_{i_0} p_{i_0}^{(0)} \sum_{i_1, \dots, i_n} p_{i_0 i_1} \cdots p_{i_{n-1} i_n} = 1 $$
+\end{statement}

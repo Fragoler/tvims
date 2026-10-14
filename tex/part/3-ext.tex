@@ -1,42 +1,100 @@
-\section{Производящие функции}
+\section{Вероятности экстремальных значений}
 
-\begin{definition}
-Для целочисленной случайной величины $\xi$ с распределением $(p_0, p_1, \dots)$ производящая функция определяется как:
-$$ P_\xi(z) = \sum_{k=0}^{\infty} p_k z^k $$
-Заметим, что $P_\xi(z) = E[z^\xi]$.
+Пусть $X_1, X_2, \dots, X_n$ --- независимые одинаково распределенные случайные величины с функцией распределения $F_\xi(x) = P(\xi < x)$.
+
+\begin{definition}[Максимум и Минимум]
+\leavevmode 
+\begin{itemize}
+    \item $M_n = \max(X_1, \dots, X_n)$
+    
+    Функция распределения максимума:
+    \[ F_{M_n}(x) = P(M_n < x) = P(X_1 < x, \dots, X_n < x) = (F_\xi(x))^n \]
+    
+    \item $\tilde{M}_n = \min(X_1, \dots, X_n)$
+    
+    Функция распределения минимума (через дополнение):
+    \[ 1 - F_{\tilde{M}_n}(x) = P(\tilde{M}_n \ge x) = P(X_1 \ge x, \dots, X_n \ge x) = (1 - F_\xi(x))^n \]
+\end{itemize}
 \end{definition}
 
-\textbf{Свойства:}
-\begin{itemize}
-    \item $P_\xi(1) = \sum p_k = 1$.
-    \item $P'_\xi(z) = \sum k p_k z^{k-1} \Rightarrow P'_\xi(1) = \sum k p_k = E\xi$ (математическое ожидание).
-    \item $P''_\xi(z) = \sum k(k-1) p_k z^{k-2} \Rightarrow P''_\xi(1) = E(\xi(\xi-1)) = E\xi^2 - E\xi$.
-\end{itemize}
+\begin{example}[Равномерное распределение]
+Пусть $X_i \sim U[a, b]$.
+$$ F_\xi(x) = \begin{cases} 0, & x < a \\ \frac{x-a}{b-a}, & x \in [a, b] \\ 1, & x > b \end{cases} $$
+Тогда для максимума $M_n$:
+$$ F_{M_n}(x) = \left( \frac{x-a}{b-a} \right)^n, \quad x \in [a, b] $$
+Плотность распределения $f_{M_n}(x) = F'_{M_n}(x) = \frac{n(x-a)^{n-1}}{(b-a)^n}$.
 
-\begin{statement}[Формула для дисперсии]
-$$ D\xi = P''_\xi(1) + P'_\xi(1) - (P'_\xi(1))^2 $$
-\end{statement}
-
-\begin{theorem}[Независимые величины]
-Если $\xi$ и $\eta$ независимы, то:
-$$ P_{\xi+\eta}(z) = P_\xi(z) P_\eta(z) $$
-\end{theorem}
-
-\begin{example}[Биномиальное распределение]
-Пусть $X \sim \text{Bernoulli}(p)$, т.е. $X = \begin{pmatrix} 0 & 1 \\ q & p \end{pmatrix}$.
-$EX = p, DX = qp$.
-$P_X(z) = q + pz$.
-
-Пусть $S_n = X_1 + \dots + X_n \sim B(n, p)$.
-$$ P_{S_n}(z) = (q + pz)^n $$
-$$ P'_{S_n}(z) = np(pz+q)^{n-1} \cdot p \quad (\text{ошибка в конспекте? должно быть } n(q+pz)^{n-1}p) $$
-В конспекте: $P'_{S_n}(1) = np(p+q)^{n-1} = np$.
-$D S_n = np(1-p) = npq$.
+Математическое ожидание максимума:
+$$ E[M_n] = \int_a^b x \cdot \frac{n(x-a)^{n-1}}{(b-a)^n} dx $$
+Замена $y = x-a$, $dy=dx$, пределы $0 \dots b-a$:
+$$ E[M_n] = \frac{n}{(b-a)^n} \int_0^{b-a} (y+a)y^{n-1} dy = \frac{n}{(b-a)^n} \left[ \frac{y^{n+1}}{n+1} + a\frac{y^n}{n} \right]_0^{b-a} $$
+$$ = \frac{n}{(b-a)^n} \left( \frac{(b-a)^{n+1}}{n+1} + a\frac{(b-a)^n}{n} \right) = \frac{n(b-a)}{n+1} + a = \frac{nb + a}{n+1} $$
 \end{example}
 
-\begin{example}[Геометрическое распределение]
-$Y = \begin{pmatrix} 1 & 2 & 3 & \dots & k \\ p & qp & q^2p & \dots & q^{k-1}p \end{pmatrix}$.
-$$ P_Y(z) = \sum_{k=1}^{\infty} q^{k-1} p z^k = pz \sum_{k=0}^{\infty} (qz)^k = \frac{pz}{1-qz} $$
-Математическое ожидание:
-$$ E Y = P'_Y(1) = \left. \frac{p(1-qz) - pz(-q)}{(1-qz)^2} \right|_{z=1} = \frac{p}{(1-q)^2} = \frac{p}{p^2} = \frac{1}{p} $$
+
+\subsection{Предельные теоремы для экстремальных значений}
+
+\begin{theorem}[Центральная предельная теорема (напоминание)]
+Пусть $\xi_1, \dots, \xi_n$ --- независимые одинаково распределенные случайные величины с $E\xi = a$, $D\xi = \sigma^2$.
+Тогда:
+$$ P\left(\frac{S_n - na}{\sqrt{n}\sigma} \le x\right) \to \Phi(x) $$
+где $S_n = \xi_1 + \dots + \xi_n$.
+\end{theorem}
+
+\begin{theorem}[Предельное распределение максимума]
+\leavevmode
+Пусть $M_n = \max(\xi_1, \dots, \xi_n)$, где $\xi_i$ независимы и одинаково распределены с функцией распределения $F(x)$.
+Если существует последовательность $u_n(x)$ такая, что:
+$$ n(1 - F(u_n)) \xrightarrow{n \to \infty} x, \quad 0 < x < \infty $$
+то:
+$$ P(M_n \le u_n(x)) \xrightarrow{n \to \infty} e^{-x} $$
+\end{theorem}
+
+\begin{proof}
+Из условия: $n(1 - F(u_n)) = x + o(1)$, откуда:
+$$ 1 - F(u_n) = \frac{x}{n} + o\left(\frac{1}{n}\right) $$
+$$ F(u_n) = 1 - \frac{x}{n} + o\left(\frac{1}{n}\right) $$
+
+Тогда:
+$$ P(M_n \le u_n(x)) = (F(u_n(x)))^n = \left(1 - \frac{x}{n} + o\left(\frac{1}{n}\right)\right)^n $$
+$$ = \exp\left[n \cdot \ln\left(1 - \frac{x}{n} + o\left(\frac{1}{n}\right)\right)\right] = e^{-x} \cdot e^{o(1)} = e^{-x}(1 + o(1)) $$
+\end{proof}
+
+\begin{example}[Экспоненциальное распределение]
+Пусть $F(x) = 1 - e^{-\lambda x}$.
+Найдем нормирующую последовательность $u_n(\tau)$ из условия:
+$$ n(1 - F(u_n(\tau))) \to \tau $$
+$$ n \cdot e^{-\lambda u_n(\tau)} = \tau(1 + o(1)) $$
+$$ e^{-\lambda u_n(\tau)} = \frac{\tau}{n}(1 + o(1)) $$
+$$ -\lambda u_n(\tau) = \ln\tau - \ln n + \ln(1 + o(1)) $$
+$$ u_n(\tau) = \frac{1}{\lambda}(\ln n - \ln\tau) $$
+
+Тогда:
+$$ P\left(M_n \le \frac{1}{\lambda}(\ln n - \ln\tau)\right) = e^{-\tau} + o(1) $$
+$$ P\left(M_n - \frac{\ln n}{\lambda} \le -\frac{\ln\tau}{\lambda}\right) = e^{-\tau} + o(1) $$
+
+Замена $y = -\frac{\ln\tau}{\lambda}$, тогда $\tau = e^{-\lambda y}$:
+$$ P\left(\lambda M_n - \ln n \le y\right) = e^{-e^{-y}} + o(1) $$
+Это распределение Гумбеля.
+\end{example}
+
+\begin{example}[Равномерное распределение на {[0, 1]}]
+$$ F(x) = \begin{cases} 0, & x \le 0 \\ x, & x \in (0, 1) \\ 1, & x \ge 1 \end{cases} $$
+
+Из условия $n(1 - F(u_n(\tau))) \to \tau$:
+$$ n(1 - u_n(\tau)) = \tau $$
+$$ u_n(\tau) = 1 - \frac{\tau}{n} $$
+
+Тогда:
+$$ P\left(M_n \le 1 - \frac{\tau}{n}\right) \to e^{-\tau} $$
+$$ P\left(n(1 - M_n) < \tau\right) = 1 - e^{-\tau} + o(1) $$
+\end{example}
+
+\begin{example}[Индикатор событий]
+Пусть $X_i = \begin{cases} 1, & \xi_i > v_n \\ 0, & \xi_i \le v_n \end{cases}$, где $P(X_i = 1) = 1 - F(v_n)$.
+
+Число превышений $S_n = \sum X_i$ имеет биномиальное распределение:
+$$ P(S_n = k) = \binom{n}{k}(1 - F(v_n))^k (F(v_n))^{n-k} $$
+
+Задача сводится к распределению Бернулли.
 \end{example}
