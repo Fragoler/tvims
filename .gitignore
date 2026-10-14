@@ -1,0 +1,13 @@
+.venv
+.vscode
+
+build
+data
+img
+
+tex/**
+!tex/**/
+!tex/*.tex
+!tex/**/*.tex
+
+*.pdf
