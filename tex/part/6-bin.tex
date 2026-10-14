@@ -1,0 +1,36 @@
+\section{Индикаторы событий и ковариация}
+
+\begin{definition}[Индикатор события]
+Индикатор события $A$:
+$$ I_A = \begin{cases} 1, & \text{событие } A \text{ произошло} \\ 0, & \text{иначе} \end{cases} $$
+\end{definition}
+
+\begin{statement}[Свойства индикаторов]
+\begin{itemize}
+    \item $E[I_A] = P(A)$
+    \item $I_A \cdot I_B = I_{AB}$ (индикатор пересечения)
+    \item Если $A$ и $B$ независимы, то $P(I_A = \alpha, I_B = \beta) = P(I_A = \alpha) \cdot P(I_B = \beta)$
+\end{itemize}
+\end{statement}
+
+\begin{definition}[Ковариация]
+$$ \text{Cov}(\xi, \eta) = E(\xi \eta) - E(\xi) E(\eta) $$
+Для индикаторов:
+$$ \text{Cov}(I_A, I_B) = E(I_A I_B) - E(I_A) E(I_B) = P(AB) - P(A)P(B) $$
+\end{definition}
+
+\begin{statement}
+Независимые случайные величины некоррелированы ($\text{Cov} = 0$), но обратное неверно (например, для нормального распределения и других случаев).
+\end{statement}
+
+\begin{definition}[Дисперсия суммы]
+$$ D(\xi + \eta) = D\xi + D\eta + 2\text{Cov}(\xi, \eta) $$
+\end{definition}
+
+
+
+\vfill
+
+\begin{flushright}
+    \textit{to be continued}
+\end{flushright}
