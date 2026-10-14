@@ -9,5 +9,6 @@ tex/**
 !tex/**/
 !tex/*.tex
 !tex/**/*.tex
+!tex/.latexmkrc
 
 *.pdf

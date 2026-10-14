@@ -1,0 +1,24 @@
+% ---------- Оформление по ГОСТ ----------
+% Поля: слева 30, справа 15, сверху/снизу 20 мм
+\usepackage[a4paper, left=30mm, right=15mm, top=20mm, bottom=20mm]{geometry}
+
+% Интервал 1,5; абзацный отступ 1,25 см, в том числе после заголовков
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{indentfirst}
+\setlength{\parindent}{1.25cm}
+
+% Заголовки: разделы --- ЗАГЛАВНЫМИ, жирным; подразделы --- жирным
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{\MakeUppercase}
+\titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{1em}{}
+
+% Подписи: «Рисунок 1 – Название», «Таблица 1 – Название»
+\usepackage{caption}
+\captionsetup{labelsep=endash, font=normalsize}
+\captionsetup[table]{justification=raggedright, singlelinecheck=off}
+\captionsetup[figure]{justification=centering}
+\addto\captionsrussian{%
+  \renewcommand{\figurename}{Рисунок}%
+  \renewcommand{\tablename}{Таблица}}
+\renewcommand{\lstlistingname}{Листинг}

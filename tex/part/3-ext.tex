@@ -1,0 +1,42 @@
+\section{Производящие функции}
+
+\begin{definition}
+Для целочисленной случайной величины $\xi$ с распределением $(p_0, p_1, \dots)$ производящая функция определяется как:
+$$ P_\xi(z) = \sum_{k=0}^{\infty} p_k z^k $$
+Заметим, что $P_\xi(z) = E[z^\xi]$.
+\end{definition}
+
+\textbf{Свойства:}
+\begin{itemize}
+    \item $P_\xi(1) = \sum p_k = 1$.
+    \item $P'_\xi(z) = \sum k p_k z^{k-1} \Rightarrow P'_\xi(1) = \sum k p_k = E\xi$ (математическое ожидание).
+    \item $P''_\xi(z) = \sum k(k-1) p_k z^{k-2} \Rightarrow P''_\xi(1) = E(\xi(\xi-1)) = E\xi^2 - E\xi$.
+\end{itemize}
+
+\begin{statement}[Формула для дисперсии]
+$$ D\xi = P''_\xi(1) + P'_\xi(1) - (P'_\xi(1))^2 $$
+\end{statement}
+
+\begin{theorem}[Независимые величины]
+Если $\xi$ и $\eta$ независимы, то:
+$$ P_{\xi+\eta}(z) = P_\xi(z) P_\eta(z) $$
+\end{theorem}
+
+\begin{example}[Биномиальное распределение]
+Пусть $X \sim \text{Bernoulli}(p)$, т.е. $X = \begin{pmatrix} 0 & 1 \\ q & p \end{pmatrix}$.
+$EX = p, DX = qp$.
+$P_X(z) = q + pz$.
+
+Пусть $S_n = X_1 + \dots + X_n \sim B(n, p)$.
+$$ P_{S_n}(z) = (q + pz)^n $$
+$$ P'_{S_n}(z) = np(pz+q)^{n-1} \cdot p \quad (\text{ошибка в конспекте? должно быть } n(q+pz)^{n-1}p) $$
+В конспекте: $P'_{S_n}(1) = np(p+q)^{n-1} = np$.
+$D S_n = np(1-p) = npq$.
+\end{example}
+
+\begin{example}[Геометрическое распределение]
+$Y = \begin{pmatrix} 1 & 2 & 3 & \dots & k \\ p & qp & q^2p & \dots & q^{k-1}p \end{pmatrix}$.
+$$ P_Y(z) = \sum_{k=1}^{\infty} q^{k-1} p z^k = pz \sum_{k=0}^{\infty} (qz)^k = \frac{pz}{1-qz} $$
+Математическое ожидание:
+$$ E Y = P'_Y(1) = \left. \frac{p(1-qz) - pz(-q)}{(1-qz)^2} \right|_{z=1} = \frac{p}{(1-q)^2} = \frac{p}{p^2} = \frac{1}{p} $$
+\end{example}

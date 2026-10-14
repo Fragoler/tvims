@@ -1,0 +1,84 @@
+\section{Целочисленные случайные величины по модулю $n$}
+
+Рассмотрим целочисленные случайные величины $\xi$ и $\eta$, принимающие значения из множества $\{0, 1, \dots, n-1\}$.
+Зададим векторы вероятностей:
+$$ \vec{p} = (p_0, p_1, \dots, p_{n-1}), \quad \vec{q} = (q_0, q_1, \dots, q_{n-1}) $$
+
+\begin{statement}[Свертка для суммы]
+Для обычной суммы независимых величин:
+$$ P(\xi + \eta = k) = \sum_{l=0}^{n-1} P(\xi = l) \cdot P(\eta = k-l) = \sum_{l=0}^{n-1} p_l q_{k-l} $$
+где $k = 0, \dots, 2n-2$.
+\end{statement}
+
+\begin{statement}[Свертка по модулю $n$]
+Для суммы по модулю $n$ ($\xi \oplus \eta$):
+$$ P(\xi \oplus \eta = k) = \sum_{l=0}^{n-1} p_l \cdot q_{l \oplus k}, \quad k = 0, \dots, n-1 $$
+(Здесь индексы берутся по модулю $n$).
+\end{statement}
+
+\begin{theorem}[Свойство равномерного распределения]
+Если одна из слагаемых величин распределена равномерно, то и их сумма по модулю $n$ распределена равномерно.
+$$ P(\xi \oplus \eta = k) = \frac{1}{n} \cdot \sum_{l=0}^{n-1} p_l = \frac{1}{n} $$
+\textit{Примечание: Это справедливо для операций $\oplus$ и $\ominus$, но можно, но не для обычных операций $+$ и $-$.}
+\end{theorem}
+
+\begin{definition}[Мера отклонения от равномерности]
+Введем величину $\Delta_\xi$, характеризующую отклонение распределения от равномерного:
+$$ \Delta_\xi = \sum_{i=0}^{n-1} \left(p_i - \frac{1}{n}\right)^2 $$
+\end{definition}
+
+\begin{statement}
+Преобразуем выражение для $\Delta_\xi$:
+$$ \Delta_\xi = \sum \left(p_i^2 - 2\frac{p_i}{n} + \frac{1}{n^2}\right) = \sum p_i^2 - \frac{2}{n}\sum p_i + \sum \frac{1}{n^2} = \sum p_i^2 - \frac{1}{n} $$
+Так как $\sum p_i^2 - \frac{1}{n} = \Delta_\xi \ge 0$, то минимум достигается при $p_i = 1/n$ (равномерное распределение).
+\end{statement}
+
+\subsection{Характеристические функции (ДПФ)}
+
+Определим характеристическую функцию (аналог дискретного преобразования Фурье):
+$$ \chi_\xi(k) = \sum_{j=0}^{n-1} p_j e^{\frac{2\pi i}{n} kj}, \quad k=0, \dots, n-1 $$
+
+\begin{theorem}[Свойство произведения]
+Характеристическая функция суммы независимых величин по модулю $n$ равна произведению их характеристических функций:
+$$ \chi_{\xi \oplus \eta}(k) = \chi_\xi(k) \cdot \chi_\eta(k) $$
+\end{theorem}
+
+\begin{proof}
+$$ \chi_{\xi \oplus \eta}(k) = \sum_{j=0}^{n-1} P(\xi \oplus \eta = j) e^{\frac{2\pi i}{n} kj} = \sum_{j=0}^{n-1} \left( \sum_{l=0}^{n-1} p_l q_{j \ominus l} \right) e^{\frac{2\pi i}{n} kj} $$
+$$ = \sum_{l=0}^{n-1} p_l e^{\frac{2\pi i}{n} kl} \sum_{j=0}^{n-1} q_{j \ominus l} e^{\frac{2\pi i}{n} k(j \ominus l)} = \chi_\xi(k) \cdot \chi_\eta(k) $$
+\end{proof}
+
+\textbf{Свойства корней из единицы} $\omega = e^{2\pi i / n}$:
+\begin{enumerate}
+    \item $\omega^n = 1$, $\omega^A = \omega^{A \pmod n}$.
+    \item $\sum_{k=0}^{n-1} \omega^k = \begin{cases} n, & \omega=1 \\ 0, & \omega \neq 1 \end{cases}$.
+\end{enumerate}
+
+\subsection{Матричная форма}
+
+Пусть $E = \left\| e^{\frac{2\pi i}{n} lj} \right\|_{l,j=0 \dots n-1}$ --- матрица ДПФ.
+Тогда вектор характеристических функций $\vec{\chi}_\xi = (\chi_\xi(0), \dots, \chi_\xi(n-1))^T$ связан с вектором вероятностей $\vec{p}_\xi$ соотношением:
+$$ \vec{\chi}_\xi = E \vec{p}_\xi $$
+
+Матрица $E$ обладает свойством ортогональности (с точностью до множителя):
+$$ (E \bar{E})_{ps} = \sum_{j=0}^{n-1} e^{\frac{2\pi i}{n} pj} e^{-\frac{2\pi i}{n} sj} = \sum_{j=0}^{n-1} e^{\frac{2\pi i}{n} (p-s)j} = \begin{cases} n, & e^{\dots}=1 \Rightarrow p=s \\ 0, & p \neq s \end{cases} $$
+Следовательно, $E \bar{E} = n I_n$.
+
+\begin{example}[Пример для $n=2$]
+$\xi = (p_0, p_1)$, $\eta = (q_0, q_1)$.
+Матрица $E = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$.
+$$ \chi_\xi(k) = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} \begin{pmatrix} p_0 \\ p_1 \end{pmatrix} = \begin{pmatrix} 1 \\ p_0 - p_1 \end{pmatrix} = \begin{pmatrix} 1 \\ \delta_\xi \end{pmatrix} $$
+где $\delta_\xi = p_0 - p_1 = 1 - 2p_1$. Отсюда $p_{0,1} = \frac{1}{2} \pm \frac{\delta_\xi}{2}$.
+
+Распределение суммы $\xi \oplus \eta$:
+$$ P_{\xi \oplus \eta} = \frac{1}{2} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} \begin{pmatrix} 1 \\ \delta_\xi \delta_\eta \end{pmatrix} = \begin{pmatrix} \frac{1 + \delta_\xi \delta_\eta}{2} \\ \frac{1 - \delta_\xi \delta_\eta}{2} \end{pmatrix} $$
+\end{example}
+
+\begin{theorem}[О равномерности суммы]
+Сумма $\xi_1 \oplus \xi_2 \oplus \dots \oplus \xi_n$ является равномерно распределенной тогда и только тогда, когда хотя бы одна из величин $\xi_i$ равномерно распределена (т.е. $\delta_{\xi_i} = 0$).
+\end{theorem}
+
+\begin{statement}[Связь дисперсии и хар. функции]
+Для меры отклонения $\Delta$ справедливо равенство (аналог равенства Парсеваля):
+$$ \Delta = \frac{1}{n} \sum_{k=1}^{n-1} |\chi_\xi(k)|^2 $$
+\end{statement}

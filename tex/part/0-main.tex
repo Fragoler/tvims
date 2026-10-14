@@ -1,0 +1,21 @@
+\section{Общие утверждения из прошлых курсов}
+
+\begin{definition}[Функция распределения]
+$F_\xi(x) = P(\xi < x)$ --- функция распределения вероятности.
+Для непрерывного случая:
+$$ F_\xi(x) = \int_{-\infty}^{x} f(t) dt $$
+\end{definition}
+
+\begin{definition}[Математическое ожидание и дисперсия]
+Математическое ожидание (мат. ожидание):
+$$ E\xi = \sum_{i=1}^{n} p_i x_i $$
+Дисперсия:
+$$ D\xi = E\left((\xi - E\xi)^2\right) = E(\xi^2) - (E(\xi))^2 $$
+\end{definition}
+
+\begin{definition}[Нормальное распределение]
+Плотность нормального распределения:
+$$ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \quad -\infty < x < \infty $$
+При $\mu=0, \sigma=1$ (стандартное нормальное распределение):
+$$ f(x) = \frac{1}{\sqrt{2\pi}} \cdot e^{-\frac{x^2}{2}} $$
+\end{definition}

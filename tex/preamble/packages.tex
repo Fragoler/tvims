@@ -1,0 +1,36 @@
+% ---------- Математика ----------
+% amssymb не подгружаем: unicode-math (preamble/fonts.tex) уже определяет
+% те же символы и конфликтует с amssymb при повторном подключении.
+\usepackage{amsmath}
+
+% ---------- Графика и рисунки ----------
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{float}          % [H]
+\usepackage{subcaption}     % подрисунки (подгружает caption)
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ---------- Таблицы, списки ----------
+\usepackage{booktabs}
+\usepackage{enumitem}
+\setlist[itemize]{label=--}
+
+% ---------- Алгоритмы и код ----------
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\small, breaklines=true, frame=single,
+        columns=fullflexible, keepspaces=true}
+
+% ---------- Теоремы ------------------
+\usepackage{amsmath, amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}[section]
+\newtheorem{example}{Пример}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{statement}{Утверждение}[section]
