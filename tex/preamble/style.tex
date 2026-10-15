@@ -25,3 +25,28 @@
 %   \renewcommand{\tablename}{Таблица}}
 % \renewcommand{\lstlistingname}{Листинг}
 
+\usepackage{amsmath, amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Опр.}[section]
+\newtheorem{example}{Пример}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{statement}{Утв.}[section]
+\newtheorem{note}{Замечание}[section]
+
+\usepackage[most]{tcolorbox}
+\newtcolorbox{commentary}[1][]{
+    enhanced,
+    colback=gray!5,                 % Серый ультра-легкий фон
+    colframe=gray!40,               % Тонкая рамка чуть темнее фона
+    boxrule=0.5pt,                  % Толщина рамки
+    sharp corners,                  % Квадратные углы (строго по ГОСТ)
+    before skip=10pt,               % Отступ сверху от текста
+    after skip=10pt,                % Отступ снизу до текста
+    fontupper=\small\fontspec{PT Sans}, % Мелкий, тонкий рубленый шрифт без засечек
+    left=10pt, right=10pt,          % Внутренние отступы слева/справа
+    top=8pt, bottom=8pt,            % Внутренние отступы сверху/снизу
+    #1
+}

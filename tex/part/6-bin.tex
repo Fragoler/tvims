@@ -1,11 +1,15 @@
 \section{Индикаторы событий и ковариация}
 
 \begin{definition}[Индикатор события]
+\leavevmode
+
 Индикатор события $A$:
 $$ I_A = \begin{cases} 1, & \text{событие } A \text{ произошло} \\ 0, & \text{иначе} \end{cases} $$
 \end{definition}
 
 \begin{statement}[Свойства индикаторов]
+\leavevmode
+
 \begin{itemize}
     \item $E[I_A] = P(A)$
     \item $I_A \cdot I_B = I_{AB}$ (индикатор пересечения)
@@ -14,22 +18,51 @@ $$ I_A = \begin{cases} 1, & \text{событие } A \text{ произошло} 
 \end{statement}
 
 \begin{definition}[Ковариация]
+\leavevmode
+
 $$ \text{Cov}(\xi, \eta) = E(\xi \eta) - E(\xi) E(\eta) $$
-Для индикаторов:
-$$ \text{Cov}(I_A, I_B) = E(I_A I_B) - E(I_A) E(I_B) = P(AB) - P(A)P(B) $$
 \end{definition}
 
 \begin{statement}
-Независимые случайные величины некоррелированы ($\text{Cov} = 0$), но обратное неверно (например, для нормального распределения и других случаев).
+Независимые случайные величины некоррелированы ($\text{Cov} = 0$), но обратное неверно.
 \end{statement}
 
-\begin{definition}[Дисперсия суммы]
+\begin{example} Зависимые некоррелированные величины:
+\begin{gather*}
+X = \begin{pmatrix} -1 & 0 & 1 \\ 1/4 & 1/2 & 1/4 \end{pmatrix} \quad Y = X^2 \\
+E(XY) = E(X^3) = (-1)^3 \cdot \frac{1}{4} + 0 \cdot \frac{1}{4} + 1^3 \cdot \frac{1}{4} = 0\\
+E(X) = -1 \cdot \frac{1}{4} + 0 \cdot \frac{1}{4} + 1 \cdot \frac{1}{4} = 0\\
+E(Y) = E(X^2) = (-1)^2 \cdot \frac{1}{4} + 0 \cdot \frac{1}{4} + 1^2 \cdot \frac{1}{4} = \frac{1}{2}\\
+\text{Cov}(X, Y) = E(X Y) - E(X) E(Y) = 0
+\end{gather*}
+
+\end{example}
+
+
+\begin{statement}[Дисперсия суммы]
 $$ D(\xi + \eta) = D\xi + D\eta + 2\text{Cov}(\xi, \eta) $$
-\end{definition}
+\end{statement}
 
+\begin{proof}[Доказательство]
+\leavevmode
 
+\begin{gather*}
+D(\xi + \eta) = E((\xi + \eta)^2) - (E(\xi + \eta))^2 = \\
+= E(\xi^2 + 2 \xi \eta + \eta^2) - E\xi^2 - 2 (E\xi) (E\eta) - E\eta^2 = \\
+= E(\xi^2) + 2 E(\xi \eta) + E(\eta^2) - E\xi^2 - 2 (E\xi) (E\eta) - E\eta^2 = \\
+= \left(E(\xi^2) - E\xi^2\right) + \left(E(\eta^2) - E\eta^2\right) + 2 \left(E(\xi \eta) - (E\xi) (E\eta)\right)
+\end{gather*}
+
+По определению, первое слагаемое — это дисперсия $D\xi$, второе — дисперсия $D\eta$, а третье — удвоенная ковариация $2\text{Cov}(\xi, \eta)$:
+ 
+$$D(\xi + \eta) = D\xi + D\eta + 2\text{Cov}(\xi, \eta)$$
+
+\end{proof}
 
 \vfill
+
+% Для индикаторов:
+% $$ \text{Cov}(I_A, I_B) = E(I_A I_B) - E(I_A) E(I_B) = P(AB) - P(A)P(B) $$
 
 \begin{flushright}
     \textit{to be continued}

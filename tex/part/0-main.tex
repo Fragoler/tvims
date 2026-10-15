@@ -1,21 +1,40 @@
 \section{Общие утверждения из прошлых курсов}
 
 \begin{definition}[Функция распределения]
+\leavevmode
+
 $F_\xi(x) = P(\xi < x)$ --- функция распределения вероятности.
 Для непрерывного случая:
 $$ F_\xi(x) = \int_{-\infty}^{x} f(t) dt $$
 \end{definition}
 
 \begin{definition}[Математическое ожидание и дисперсия]
+\leavevmode
+
 Математическое ожидание (мат. ожидание):
-$$ E\xi = \sum_{i=1}^{n} p_i x_i $$
+\begin{gather*}
+E\xi = \sum_{i=1}^{n} p_i x_i \\
+E\xi = \int_{-\infty}^{+\infty} x f(x) \, dx \\
+E\phi(\xi) = \int_{-\infty}^{+\infty} \phi(x) f(x) \, dx
+\end{gather*}
 Дисперсия:
-$$ D\xi = E\left((\xi - E\xi)^2\right) = E(\xi^2) - (E(\xi))^2 $$
+$$ D\xi = E\left((\xi - E\xi)^2\right) = E(\xi^2) - 2(E\xi)^2 + E(\xi)^2 = E(\xi^2) - (E(\xi))^2 $$
 \end{definition}
 
 \begin{definition}[Нормальное распределение]
+\leavevmode
+
 Плотность нормального распределения:
-$$ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \quad -\infty < x < \infty $$
-При $\mu=0, \sigma=1$ (стандартное нормальное распределение):
-$$ f(x) = \frac{1}{\sqrt{2\pi}} \cdot e^{-\frac{x^2}{2}} $$
+\begin{gather*}
+\xi \sim N(\mu, \sigma)\\
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \quad -\infty < x < \infty 
+\end{gather*}
+
+При $\mu=0, \sigma=1$ ~--- стандартное нормальное распределение:
+\begin{gather*}
+\xi \sim N(0, 1) \\
+f(x) = \frac{1}{\sqrt{2\pi}} \cdot e^{-\frac{x^2}{2}}
+\end{gather*}
+
+
 \end{definition}
